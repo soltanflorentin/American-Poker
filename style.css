@@ -1,0 +1,77 @@
+
+h1 {
+  background: blue;
+  text-align: center;
+}
+
+.topPart {
+  height: 230px;
+  border: 1px solid red;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  background: grey;
+}
+.topPart ul li{
+  list-style: none;
+  background: lightblue;
+}
+.winBetAll{
+  background: pink;
+  width: 40px;
+}
+.carti{
+  border: 2px solid black;
+  margin-left: 15px;
+  height: 250px;
+  width: 190px;
+  background: blue;
+}
+.midPart{
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  background: lightgrey;
+}
+.bottomPart{
+  background: lightgreen;
+  height: 90px;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  padding-top: 15px;
+}
+.credit, .bet{
+  font-size: 25px;
+  font-weight: bold;
+}
+.betAllThree{
+  display: grid;
+  grid-template-columns: auto auto;
+}
+.clsCardIndividual{
+  height: 210px;
+  width: 100%;
+}
+.divButtons{
+  height: 20px;
+  width: auto;
+}
+.credit{
+  border: 1px solid brown;
+}
+.betAllThree{
+
+}
+.dealCollectDoubble{
+
+}
+.redBlack{
+
+}
+.butoaneBottom{
+  height: 50px;
+}
+#deal, #collect, #doubble, #red, #black{
+  width: 100px;
+}
+.betAllThree, .dealCollectDoubble,.credit,.redBlack{
+  border: 1px solid brown;
+}

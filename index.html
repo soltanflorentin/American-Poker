@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>American Poker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/94bd77e01c.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type='text/javascript' language='javascript' src='JS.js'/></script>
+  </head>
+  <body>
+      <h1>FLO'S POKER</h1>
+      <div class="topPart">
+        <ul>
+          <li>ROYAL FLUSH  <span>250</span></li>
+          <li>STRAIGHT FLUSH <span>150</span></li>
+          <li>4 OF A KIND <span>100</span> </li>
+          <li>FULL HOUSE <span>50</span> </li>
+          <li>FLUSH <span>30</span> </li>
+          <li>STRAIGHT <span>20</span> </li>
+          <li>3 OF A KIND <span>10</span> </li>
+          <li>2 PAIR <span>5</span> </li>
+          <li>JACKS or Better <span>2</span> </li>
+        </ul>
+        <div class="winBetExpectation">
+          <div class="winBetAll">250</div>
+          <div class="winBetAll">150</div>
+          <div class="winBetAll">100</div>
+          <div class="winBetAll">50</div>
+          <div class="winBetAll">30</div>
+          <div class="winBetAll">20</div>
+          <div class="winBetAll">10</div>
+          <div class="winBetAll">5</div>
+          <div class="winBetAll">2</div>
+        </div>
+      </div>
+      <div class="midPart">
+          <div id="idCard1" class="card1 carti" onclick="cartiOnClick(document.getElementById('idCard1').id)">
+            <img class="clsCardIndividual"  id="carte1" src="backCard.jpg" alt="card1">
+          </div>
+          <div id="idCard2" class="card2 carti" onclick="cartiOnClick(document.getElementById('idCard2').id)">
+            <img class="clsCardIndividual" id="carte2" src="backCard.jpg" alt="card2">
+          </div>
+          <div id="idCard3" class="card3 carti" onclick="cartiOnClick(document.getElementById('idCard3').id)">
+            <img class="clsCardIndividual" id="carte3" src="backCard.jpg" alt="card3">
+          </div>
+          <div id="idCard4" class="card4 carti" onclick="cartiOnClick(document.getElementById('idCard4').id)">
+            <img class="clsCardIndividual" id="carte4" src="backCard.jpg" alt="car4">
+          </div>
+          <div id="idCard5" class="card5 carti" onclick="cartiOnClick(document.getElementById('idCard5').id)">
+            <img class="clsCardIndividual" id="carte5" src="backCard.jpg" alt="card5">
+          </div>
+      </div>
+      <div class="bottomPart">
+          <div class="credit">
+                  <div>Credit: <span id="spanCredit">100</span> </div>
+          </div>
+          <div class="betAllThree">
+                  <div class="bet">
+                     <div>Bet: <span id="spanBet">5</span> </div>
+                  </div>
+                  <div>
+                  <button class="butoaneBottom btn btn-secondary" id="betMinus" type="button" onclick="betFunc(false)">BET-</button>
+                  <button class="butoaneBottom btn btn-secondary" id="betPlus" type="button" onclick="betFunc(true)">BET+</button>
+                </div>
+          </div>
+          <div class="dealCollectDoubble">
+                  <button class="butoaneBottom btn btn-success" id="deal" type="button" >DEAL</button>
+                  <button class="butoaneBottom btn btn-primary" id="collect" type="button" >COLLECT</button>
+                  <button class="butoaneBottom btn btn-warning" id="doubble" type="button" >DOUBBLE</button>
+          </div>
+          <div class="redBlack">
+                  <button class="butoaneBottom btn btn-danger" id="red" type="button" >RED</button>
+                  <button class="butoaneBottom btn btn-dark" id="black" type="button" >BLACK</button>
+          </div>
+      </div>
+
+<div id="test">
+xxxxxxx
+</div>
+
+
+
+
+
+  </body>
+</html>
