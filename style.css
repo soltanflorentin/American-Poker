@@ -12,13 +12,23 @@ h1 {
   grid-template-columns: auto auto auto auto auto;
   background: grey;
 }
+ul{
+  padding-left: 0px;
+}
 .topPart ul li{
   list-style: none;
   background: lightblue;
+  font-weight: bold;
+  font-size: 18px;
 }
 .winBetAll{
   background: pink;
-  width: 40px;
+  width: 50px;
+  font-weight: bold;
+  font-size: 18px;
+}
+.winBetExpectation{
+  text-align: right;
 }
 
 
