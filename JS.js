@@ -42,14 +42,14 @@ function betFunc(x){  //Raise bet, plus x=true, minus x=false.
    return;
 }
 
-function cartiOnClick(x){
+function cartiOnClick(x,z){
   y = document.getElementById(x).style.background;
   if(y === "red"){
     document.getElementById(x).style.background = "blue";
-    document.querySelector(".held1").innerHTML= " ";
+    document.getElementById(z).innerHTML= " ";
   }else{
   document.getElementById(x).style.background = "red";
-  document.querySelector(".held1").innerHTML= "HELD";
+  document.getElementById(z).innerHTML= "HELD";
   }
   return;
 }

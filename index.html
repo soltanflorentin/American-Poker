@@ -11,7 +11,7 @@
     <script type='text/javascript' language='javascript' src='JS.js'/></script>
   </head>
   <body>
-      <h1>FLO'S POKER</h1>
+      <!-- <h1>FLO'S POKER</h1> -->
       <div class="topPart">
         <ul>
           <li>ROYAL FLUSH</li>
@@ -37,21 +37,25 @@
         </div>
       </div>
       <div class="midPart">
-          <div id="idCard1" class="card1 carti" onclick="cartiOnClick(document.getElementById('idCard1').id)">
+          <div id="idCard1" class="card1 carti" onclick="cartiOnClick(document.getElementById('idCard1').id, document.getElementById('held1').id)">
             <div><img class="clsCardIndividual"  id="carte1" src="backCard.jpg" alt="card1"></div>
-            <div class="held held1"></div>
+            <div id="held1" class="held held1"></div>
           </div>
-          <div id="idCard2" class="card2 carti" onclick="cartiOnClick(document.getElementById('idCard2').id)">
+          <div id="idCard2" class="card2 carti" onclick="cartiOnClick(document.getElementById('idCard2').id, document.getElementById('held2').id)">
             <img class="clsCardIndividual" id="carte2" src="backCard.jpg" alt="card2">
+            <div id="held2" class="held held2"></div>
           </div>
-          <div id="idCard3" class="card3 carti" onclick="cartiOnClick(document.getElementById('idCard3').id)">
+          <div id="idCard3" class="card3 carti" onclick="cartiOnClick(document.getElementById('idCard3').id, document.getElementById('held3').id)">
             <img class="clsCardIndividual" id="carte3" src="backCard.jpg" alt="card3">
+            <div id="held3" class="held held3"></div>
           </div>
-          <div id="idCard4" class="card4 carti" onclick="cartiOnClick(document.getElementById('idCard4').id)">
+          <div id="idCard4" class="card4 carti" onclick="cartiOnClick(document.getElementById('idCard4').id, document.getElementById('held4').id)">
             <img class="clsCardIndividual" id="carte4" src="backCard.jpg" alt="car4">
+            <div id="held4" class="held held4"></div>
           </div>
-          <div id="idCard5" class="card5 carti" onclick="cartiOnClick(document.getElementById('idCard5').id)">
+          <div id="idCard5" class="card5 carti" onclick="cartiOnClick(document.getElementById('idCard5').id, document.getElementById('held5').id)">
             <img class="clsCardIndividual" id="carte5" src="backCard.jpg" alt="card5">
+            <div id="held5" class="held held5"></div>
           </div>
       </div>
       <div class="bottomPart">
@@ -78,11 +82,9 @@
           </div>
     </div>
 
-<div id="test">xxxx
+<div id="test">
 </div>
-<div id="test2">
-  yyy
-</div>
+
 
 
 
