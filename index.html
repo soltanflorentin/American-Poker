@@ -38,7 +38,8 @@
       </div>
       <div class="midPart">
           <div id="idCard1" class="card1 carti" onclick="cartiOnClick(document.getElementById('idCard1').id)">
-            <img class="clsCardIndividual"  id="carte1" src="backCard.jpg" alt="card1">
+            <div><img class="clsCardIndividual"  id="carte1" src="backCard.jpg" alt="card1"></div>
+            <div class="held held1"></div>
           </div>
           <div id="idCard2" class="card2 carti" onclick="cartiOnClick(document.getElementById('idCard2').id)">
             <img class="clsCardIndividual" id="carte2" src="backCard.jpg" alt="card2">
@@ -61,9 +62,9 @@
                   <div class="bet">
                      <div>Bet: <span id="spanBet">5</span> </div>
                   </div>
-                  <div>
-                  <button class="butoaneBottom btn btn-secondary" id="betMinus" type="button" onclick="betFunc(false)">BET-</button>
-                  <button class="butoaneBottom btn btn-secondary" id="betPlus" type="button" onclick="betFunc(true)">BET+</button>
+                  <div class="BetPlusMinus">
+                    <button class="butoaneBottom btn" id="betMinus" type="button" onclick="betFunc(false)">BET-</button>
+                    <button class="butoaneBottom btn" id="betPlus" type="button" onclick="betFunc(true)">BET+</button>
                 </div>
           </div>
           <div class="dealCollectDoubble">
@@ -75,7 +76,7 @@
                   <button class="butoaneBottom btn btn-danger" id="red" type="button" >RED</button>
                   <button class="butoaneBottom btn btn-dark" id="black" type="button" >BLACK</button>
           </div>
-      </div>
+    </div>
 
 <div id="test">
 xxxxxxx

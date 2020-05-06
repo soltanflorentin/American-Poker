@@ -4,6 +4,7 @@ h1 {
   text-align: center;
 }
 
+
 .topPart {
   height: 230px;
   border: 1px solid red;
@@ -19,6 +20,24 @@ h1 {
   background: pink;
   width: 40px;
 }
+
+
+.midPart{
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  background: lightgrey;
+}
+.card1{
+  display: grid;
+  grid-template-rows: auto 30px;
+  text-align: center;
+}
+.held{
+  font-size: 25px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: -15px;
+}
 .carti{
   border: 2px solid black;
   margin-left: 15px;
@@ -26,14 +45,15 @@ h1 {
   width: 190px;
   background: blue;
 }
-.midPart{
-  display: grid;
-  grid-template-columns: auto auto auto auto auto;
-  background: lightgrey;
+.clsCardIndividual{
+  height: 220px;
+  width: 100%;
 }
+
+
 .bottomPart{
   background: lightgreen;
-  height: 90px;
+  height: 80px;
   display: grid;
   grid-template-columns: auto auto auto auto;
   padding-top: 15px;
@@ -46,25 +66,32 @@ h1 {
   display: grid;
   grid-template-columns: auto auto;
 }
-.clsCardIndividual{
-  height: 210px;
-  width: 100%;
-}
 .divButtons{
   height: 20px;
   width: auto;
 }
 .credit{
-  border: 1px solid brown;
+
 }
 .betAllThree{
 
 }
-.dealCollectDoubble{
+.BetPlusMinus{
 
 }
+#betPlus, #betMinus{
+  background: brown;
+  color: white;
+}
+.dealCollectDoubble{
+  text-align:center;
+}
 .redBlack{
-
+  text-align: right;
+}
+#black{
+  background: black;
+  color: white;
 }
 .butoaneBottom{
   height: 50px;
@@ -72,6 +99,6 @@ h1 {
 #deal, #collect, #doubble, #red, #black{
   width: 100px;
 }
-.betAllThree, .dealCollectDoubble,.credit,.redBlack{
+.betAllThree, .#dealCollectDoubble,.credit,.#redBlack{
   border: 1px solid brown;
 }

@@ -1,9 +1,7 @@
 $(document).ready(function() {
 
-$("#deal").click(function(){
-
-
-$("h1").text("youuu")
+$(".butoaneBottom").click(function(){
+    $(".dealCollectDoubble").addClass("animated shake")
 })
 
 
