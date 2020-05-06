@@ -19,8 +19,10 @@ function cartiOnClick(x){
   y = document.getElementById(x).style.background;
   if(y === "red"){
     document.getElementById(x).style.background = "blue";
+    document.querySelector(".held1").innerHTML= " ";
   }else{
   document.getElementById(x).style.background = "red";
+  document.querySelector(".held1").innerHTML= "HELD";
   }
   return;
 }
