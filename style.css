@@ -1,15 +1,31 @@
+:root{
+  --gridArea: 3/1/1/4;
+  --colorBackgroundCards: grey;
+  --colorBackgroundCardsHeld: blue;
+}
+
+
+
+
+.clsCardIndividualSuits{
+      grid-area: 2/2/3/3;
+}
+
+
+
+
+
 
 h1 {
   background: blue;
   text-align: center;
 }
 
-
 .topPart {
-  height: 230px;
+  height: 200px;
   border: 1px solid red;
   display: grid;
-  grid-template-columns: auto auto auto auto auto;
+  grid-template-columns: 300px 50px 118px auto 184px 230px;
   background: grey;
 }
 ul{
@@ -19,52 +35,96 @@ ul{
   list-style: none;
   background: lightblue;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
 }
 .winBetAll{
   background: pink;
   width: 50px;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
 }
 .winBetExpectation{
   text-align: right;
+  width: 0px;
+}
+
+
+#logoGirlsPhoto{
+  height: 200px;
+}
+.textJoc{
+  color: white;
+  font-weight: bold;
+  display: flex;
+  flex-wrap: wrap;
+}
+#dblCardPhoto{
+  height: 200px;
+}
+.dblWinLevels{
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  height: 200px;
+}
+.levels{
+  height: 35px;
+  width: 130px;
+  border: 1px solid red;
+  background: white;
+}
+#jackpotLevel6{
+  width: 190px;
+  height: 50px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+
 }
 
 
 .midPart{
   display: grid;
-  grid-template-columns: auto auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto auto auto;
   background: lightgrey;
 }
-.card1{
-  display: grid;
-  grid-template-rows: auto 30px;
-  text-align: center;
-}
+
 .held{
-  font-size: 25px;
+  font-size: 13px;
   font-weight: bold;
   color: white;
-  margin-bottom: -15px;
   text-align: center;
+  grid-area: 4/2/3/3;
 }
 .carti{
   border: 2px solid black;
   margin-left: 15px;
-  height: 250px;
-  width: 190px;
-  background: blue;
+  height: 205px;
+  width: 160px;
+  background: grey;
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-rows: 1fr 4fr 0.5fr;
+  grid-template-areas: "areaNumar area2 area3" "area4 areaSuits area6" "area7 areaHeld area9";
 }
 .clsCardIndividual{
-  height: 220px;
+  height: 100%;
   width: 100%;
+
+  grid-area: var(--gridArea);
+}
+.clasAreaNumar{
+  grid-area: areaNumar;
+  color: white;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
 }
 
 
 .bottomPart{
   background: lightgreen;
-  height: 80px;
+  height: 55px;
   display: grid;
   grid-template-columns: auto auto auto auto;
   padding-top: 15px;
@@ -76,9 +136,10 @@ ul{
 .betAllThree{
   display: grid;
   grid-template-columns: auto auto;
+
 }
 .divButtons{
-  height: 20px;
+  height: 15px;
   width: auto;
 }
 .credit{
@@ -105,7 +166,8 @@ ul{
   color: white;
 }
 .butoaneBottom{
-  height: 50px;
+  height: 40px;
+  margin-top: -7px;
 }
 #deal, #collect, #doubble, #red, #black{
   width: 100px;

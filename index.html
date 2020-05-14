@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/94bd77e01c.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript" src="jquery.js"></script>
     <script type='text/javascript' language='javascript' src='JS.js'/></script>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/cardsJS/dist/cards.min.css" />
+    <script src="https://unpkg.com/cardsJS/dist/cards.min.js" type="text/javascript"></script>
   </head>
   <body>
       <!-- <h1>FLO'S POKER</h1> -->
@@ -35,28 +36,46 @@
           <div class="winBetAll twoPairs">25</div>
           <div class="winBetAll onePair">10</div>
         </div>
+          <img id="logoGirlsPhoto" src="photo/logo_girl_zoom.png" alt="girl">
+          <div id="idTextGirl" class="textJoc">Buna, sunt asistenta ta de joc !</div>
+          <img id="dblCardPhoto" src="photo/backCard.jpg" alt="dblCard">
+          <div class="dblWinLevels">
+             <div class="levels level1"></div>
+             <div class="levels level2"></div>
+             <div class="levels level3"></div>
+             <div class="levels level4"></div>
+             <div class="levels level5"></div>
+             <div id="jackpotLevel6" class="levels level6">$$ JACKPOT $$</div>
+          </div>
       </div>
       <div class="midPart">
+        <div class="midLeft"></div>
           <div id="idCard1" class="card1 carti" onclick="cartiOnClick(document.getElementById('idCard1').id, document.getElementById('held1').id)">
-            <div><img class="clsCardIndividual"  id="carte1" src="backCard.jpg" alt="card1"></div>
+            <div id="idCardNumber1" class="clasAreaNumar"></div>
+            <img class="clsCardIndividual"  id="carte1" src="photo/backCard.jpg" alt="card1">
             <div id="held1" class="held held1"></div>
           </div>
           <div id="idCard2" class="card2 carti" onclick="cartiOnClick(document.getElementById('idCard2').id, document.getElementById('held2').id)">
-            <img class="clsCardIndividual" id="carte2" src="backCard.jpg" alt="card2">
+            <div id="idCardNumber2" class="clasAreaNumar"></div>
+            <img class="clsCardIndividual" id="carte2" src="photo/backCard.jpg" alt="card2">
             <div id="held2" class="held held2"></div>
           </div>
           <div id="idCard3" class="card3 carti" onclick="cartiOnClick(document.getElementById('idCard3').id, document.getElementById('held3').id)">
-            <img class="clsCardIndividual" id="carte3" src="backCard.jpg" alt="card3">
+            <div id="idCardNumber3" class="clasAreaNumar"></div>
+            <img class="clsCardIndividual" id="carte3" src="photo/backCard.jpg" alt="card3">
             <div id="held3" class="held held3"></div>
           </div>
           <div id="idCard4" class="card4 carti" onclick="cartiOnClick(document.getElementById('idCard4').id, document.getElementById('held4').id)">
-            <img class="clsCardIndividual" id="carte4" src="backCard.jpg" alt="car4">
+            <div id="idCardNumber4" class="clasAreaNumar"></div>
+            <img class="clsCardIndividual" id="carte4" src="photo/backCard.jpg" alt="car4">
             <div id="held4" class="held held4"></div>
           </div>
           <div id="idCard5" class="card5 carti" onclick="cartiOnClick(document.getElementById('idCard5').id, document.getElementById('held5').id)">
-            <img class="clsCardIndividual" id="carte5" src="backCard.jpg" alt="card5">
+            <div id="idCardNumber5" class="clasAreaNumar"></div>
+            <img class="clsCardIndividual" id="carte5" src="photo/backCard.jpg" alt="card5">
             <div id="held5" class="held held5"></div>
           </div>
+          <div class="midRight"></div>
       </div>
       <div class="bottomPart">
           <div class="credit">
@@ -72,17 +91,20 @@
                 </div>
           </div>
           <div class="dealCollectDoubble">
-                  <button class="butoaneBottom btn btn-success" id="deal" type="button" onclick="test()" >DEAL</button>
+                  <button class="butoaneBottom btn btn-success" id="deal" type="button" onclick="dealCardsScreen()" >DEAL</button>
                   <button class="butoaneBottom btn btn-primary" id="collect" type="button" >COLLECT</button>
                   <button class="butoaneBottom btn btn-warning" id="doubble" type="button" >DOUBBLE</button>
           </div>
           <div class="redBlack">
                   <button class="butoaneBottom btn btn-danger" id="red" type="button" >RED</button>
-                  <button class="butoaneBottom btn btn-dark" id="black" type="button" >BLACK</button>
+                  <button class="butoaneBottom btn btn-default" id="black" type="button" >BLACK</button>
           </div>
     </div>
 
-<div id="test">
+<div id="test" onclick="flo()">yyyyyy
+</div>
+<div id="test2" onclick="flo2()">zzz
+
 </div>
 
 
