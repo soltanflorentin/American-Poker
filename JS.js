@@ -3,6 +3,8 @@
 var bet = 5;
 var credit = 100;
 var heldOn = false;
+var win = 0;
+var levelsDbl = document.getElementsByClassName("levels");
 var betExpectationValuefix = [1250, 750, 500, 250, 150, 100,50,25,10];
 var betExpectationValue = [1250, 750, 500, 250, 150, 100,50,25,10];
 
@@ -39,7 +41,18 @@ function betFunc(x){  //Raise bet, plus x=true, minus x=false.
    document.querySelector("#spanBet").innerHTML= bet;
    return;
 }
-
+//-----------------------------CREDIT -------------------------------------
+function creditCheck(){
+  if (credit === 0) {
+     gameOver();
+   }else if (credit - bet < 0){// cand creditul este mai mic ca miza credit = miza
+        return true;
+    }else if (credit - bet > 0){
+        return false;
+    }else {
+      return "x";
+    }
+}
 //-------------------------------------CARDS COLOR AND HELD -------------------------------
 function cartiOnClick(x,z){
   if (heldOn){
@@ -82,17 +95,10 @@ function shuffle(deck){
   return deck;
 }
 
-function flo(){
-document.getElementById('test').innerHTML = deckShuffle.length;
-document.getElementById('test2').innerHTML = deckShuffle.length;
-}
-
 
 // deal button -----------first 5 cards--------------------------------------------
 var deck1 = newDeck();
 var deckShuffle = shuffle(deck1);
-
-
 
 function getCards(x){ // x este nr de carti dorite -----
     times = 0;
@@ -144,12 +150,14 @@ function checkSuits(x,cards){ // x este a cata carte din cele 5
 };
 
 function startAgain(){
+  if (credit === 0){
+    gameOver();
+  }
+  win = 0;
   heldOn = false;
   deck1 = newDeck();
   deckShuffle = shuffle(deck1);
   buttonsDisable("betDeal");//activam butoanele deal si bet si dezactivam collect, doubble, red si black
-  backColor(backWinColor);//scoatem culoarea de la castig
-
 
   document.getElementById("carte1").style.setProperty("--gridArea","4/1/1/4");
   document.getElementById("carte1").src= "photo/backCard.jpg";
@@ -176,7 +184,16 @@ function startAgain(){
 function dealCardsScreen(){
     heldOn = true;
     buttonsDisable("deal");
-    credit -= bet;
+    document.getElementById("idTextGirl").innerHTML = "Alege ce carti vrei sa opresti.";
+
+    var checkCredit = creditCheck();
+    if (checkCredit){
+        bet = credit;
+        credit = 0;
+        document.querySelector("#spanBet").innerHTML= bet;
+    }else if (!checkCredit){
+        credit -= bet;
+    }
     document.getElementById("spanCredit").innerHTML = credit;
 
     newCards = getCards(5);
@@ -212,8 +229,8 @@ function dealCardsScreen(){
 
 //----Deal button----------change cards----------------------------------------------
 function changeCards(){
-  heldOn = true;
-  if (document.getElementById("idCard1").style.background === "grey"){
+  heldOn = false;
+  if (document.getElementById("idCard1").style.background === "grey" || document.getElementById("idCard1").style.background === "#808080"){
       var anotherCard = getCards(1);
       var suitCard = checkSuits(0,anotherCard);
       document.getElementById("idCardNumber1").innerHTML = anotherCard[0][0];
@@ -255,8 +272,6 @@ function changeCards(){
 };
 
 function ifWin(){//----------------check if win------------------
-  flo = document.getElementById("idCard5").style.background;
-  document.getElementById("idTextGirl").innerHTML = flo; //temporar !!!!!!
   var valueList = [];
   var suitsList = [];
 
@@ -295,9 +310,6 @@ function ifWin(){//----------------check if win------------------
         sortBigPairArray.push(q);
       }
 }
-
-document.getElementById("test").innerHTML = sortBigPairArray;
-
   if (sortList.toString() === "1,10,12,13,14" && suitsListTrue === true) {
     win = bet*250;
     document.getElementById("idTextGirl").innerHTML = `WAW !!! Royal Flush You win ${win}, Collect or Doubble?`;
@@ -344,6 +356,16 @@ document.getElementById("test").innerHTML = sortBigPairArray;
       backWinColor = document.getElementsByClassName("backPair");
       backColor(backWinColor);
   }
+  if (win === 0){
+    buttonsDisable("betOn");
+    document.getElementById("idTextGirl").innerHTML = "Ai pierdut ! Alege o miza si sa continuam!";
+    if (credit === 0){
+      gameOver();
+    }
+    deck1 = newDeck();
+    deckShuffle = shuffle(deck1);
+    document.getElementById("deal").setAttribute("onclick" , "dealCardsScreen()");
+  }
   return;
 }
 
@@ -352,10 +374,12 @@ function doubbleOrNot(dbl){
     if(!dbl){
       credit += win;
       document.getElementById("spanCredit").innerHTML = credit;
+      backColor(backWinColor);
       startAgain();//----------------start again------------------------------------
     }else {
       level = 0;
       document.querySelector(".dblWinLevels").style.background = "#ECECEC";
+      document.getElementById("idTextGirl").innerHTML = "Ghiceste culoarea cartii, rosie sau neagra?";
       buttonsDisable("collDbl");
     }
     return;
@@ -363,7 +387,6 @@ function doubbleOrNot(dbl){
 
 //------------------Red or black-----------------------------------
 function redBlack(colorDbl){
-    document.getElementById("idTextGirl").innerHTML = colorDbl;
     doubbleCard = getCards(1);
     suitDblCard = checkSuits(0,doubbleCard);
     winTrue = false;
@@ -395,13 +418,12 @@ function redBlack(colorDbl){
           document.getElementById("idTextGirl").innerHTML = "JACKPOT !!! Ai mai castigat 500 !!!";
           win += 500;
           credit += win;
-          setTimeout(()=>{document.getElementById("spanCredit").innerHTML = credit; startAgain();},10000);
+          setTimeout(()=>{backColor(backWinColor); document.getElementById("spanCredit").innerHTML = credit; startAgain();},10000);
       }
     }else {
       document.getElementById("idTextGirl").innerHTML = "Ai pierdut!!";
       level = 0;
-      win = 0;
-      setTimeout(()=>{startAgain();},1500);
+      setTimeout(()=>{backColor(backWinColor); startAgain();},1500);
     }
     return;
 }
@@ -497,14 +519,28 @@ function buttonsDisable(whichButton){//----------buttons on off----------------
       document.getElementById("red").disabled = false;
       document.getElementById("black").disabled = false;
       document.getElementById("doubble").disabled = true;
-   }else if (whichButton === "redBlack") {
+   }else if (whichButton === "betOn") {
+     document.getElementById("betMinus").disabled = false;
+     document.getElementById("betPlus").disabled = false;
+   }else if (whichButton === "gameOver"){
+     document.getElementById("betMinus").disabled = true;
+     document.getElementById("betPlus").disabled = true;
+     document.getElementById("deal").disabled = true;
+     document.getElementById("doubble").disabled = true;
+     document.getElementById("collect").disabled = true;
+     document.getElementById("red").disabled = true;
+     document.getElementById("black").disabled = true;
 
    }
 
    return;
 }
 
-
+function gameOver(){//----------out of credit------------------------
+    document.getElementById("idTextGirl").innerHTML = "GAME OVER";
+    buttonsDisable("gameOver");
+    return
+}
 
 
 //$(document).ready(function() { //JQUERY !!----------------------------------
