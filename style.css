@@ -1,19 +1,12 @@
 :root{
-  --gridArea: 3/1/1/4;
+  --gridArea: 4/1/1/4;
   --colorBackgroundCards: grey;
   --colorBackgroundCardsHeld: blue;
 }
 
-
-
-
 .clsCardIndividualSuits{
       grid-area: 2/2/3/3;
 }
-
-
-
-
 
 
 h1 {
@@ -25,7 +18,7 @@ h1 {
   height: 200px;
   border: 1px solid red;
   display: grid;
-  grid-template-columns: 300px 50px 118px auto 184px 230px;
+  grid-template-columns: 300px 50px 165px auto 160px 230px;
   background: grey;
 }
 ul{
@@ -48,7 +41,6 @@ ul{
   width: 0px;
 }
 
-
 #logoGirlsPhoto{
   height: 200px;
 }
@@ -58,8 +50,19 @@ ul{
   display: flex;
   flex-wrap: wrap;
 }
-#dblCardPhoto{
+.divDblCard{
   height: 200px;
+  background: lightpink;
+  display: grid;
+  grid-template-rows: 0% 100%;
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+}
+
+#dblCardPhoto{
+  height: 100%;
+  width: 100%;
 }
 .dblWinLevels{
   display: flex;
@@ -110,7 +113,6 @@ ul{
 .clsCardIndividual{
   height: 100%;
   width: 100%;
-
   grid-area: var(--gridArea);
 }
 .clasAreaNumar{

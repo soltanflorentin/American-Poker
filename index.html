@@ -15,30 +15,33 @@
       <!-- <h1>FLO'S POKER</h1> -->
       <div class="topPart">
         <ul>
-          <li>ROYAL FLUSH</li>
-          <li>STRAIGHT FLUSH</li>
-          <li>4 OF A KIND</li>
-          <li>FULL HOUSE</li>
-          <li>FLUSH</li>
-          <li>STRAIGHT</li>
-          <li>3 OF A KIND </li>
-          <li>2 PAIR</li>
-          <li>JACKS or Better</li>
+          <li class="backRoyal">ROYAL FLUSH</li>
+          <li class="backStrFl">STRAIGHT FLUSH</li>
+          <li class="back4">4 OF A KIND</li>
+          <li class="backFull">FULL HOUSE</li>
+          <li class="backFlush">FLUSH</li>
+          <li class="backStr">STRAIGHT</li>
+          <li class="back3">3 OF A KIND </li>
+          <li class="back2">2 PAIR</li>
+          <li class="backPair">JACKS or Better</li>
         </ul>
         <div class="winBetExpectation">
-          <div class="winBetAll royal">1250</div>
-          <div class="winBetAll staightflush">750</div>
-          <div class="winBetAll careu">500</div>
-          <div class="winBetAll fullhouse">250</div>
-          <div class="winBetAll flush">150</div>
-          <div class="winBetAll straight">100</div>
-          <div class="winBetAll threeKinds">50</div>
-          <div class="winBetAll twoPairs">25</div>
-          <div class="winBetAll onePair">10</div>
+          <div class="backRoyal winBetAll royal">1250</div>
+          <div class="backStrFl winBetAll staightflush">750</div>
+          <div class="back4 winBetAll careu">500</div>
+          <div class="backFull winBetAll fullhouse">250</div>
+          <div class="backFlush winBetAll flush">150</div>
+          <div class="backStr winBetAll straight">100</div>
+          <div class="back3 winBetAll threeKinds">50</div>
+          <div class="back2 winBetAll twoPairs">25</div>
+          <div class="backPair winBetAll onePair">10</div>
         </div>
           <img id="logoGirlsPhoto" src="photo/logo_girl_zoom.png" alt="girl">
           <div id="idTextGirl" class="textJoc">Buna, sunt asistenta ta de joc !</div>
+        <div class="divDblCard">
+          <div id="divNrDblCard"></div>
           <img id="dblCardPhoto" src="photo/backCard.jpg" alt="dblCard">
+        </div>
           <div class="dblWinLevels">
              <div class="levels level1"></div>
              <div class="levels level2"></div>
@@ -92,12 +95,12 @@
           </div>
           <div class="dealCollectDoubble">
                   <button class="butoaneBottom btn btn-success" id="deal" type="button" onclick="dealCardsScreen()" >DEAL</button>
-                  <button class="butoaneBottom btn btn-primary" id="collect" type="button" >COLLECT</button>
-                  <button class="butoaneBottom btn btn-warning" id="doubble" type="button" >DOUBBLE</button>
+                  <button class="butoaneBottom btn btn-primary" id="collect" type="button" onclick="doubbleOrNot(false)" disabled>COLLECT</button>
+                  <button class="butoaneBottom btn btn-warning" id="doubble" type="button" onclick="doubbleOrNot(true)" disabled>DOUBBLE</button>
           </div>
           <div class="redBlack">
-                  <button class="butoaneBottom btn btn-danger" id="red" type="button" >RED</button>
-                  <button class="butoaneBottom btn btn-default" id="black" type="button" >BLACK</button>
+                  <button class="butoaneBottom btn btn-danger" id="red" type="button" onclick="redBlack('red')" disabled>RED</button>
+                  <button class="butoaneBottom btn btn-default" id="black" type="button" onclick="redBlack('black')" disabled>BLACK</button>
           </div>
     </div>
 

@@ -1,8 +1,11 @@
 
 //---------------------------------WIN DYSPLAY ---------------------------------
 var bet = 5;
+var credit = 100;
+var heldOn = false;
 var betExpectationValuefix = [1250, 750, 500, 250, 150, 100,50,25,10];
 var betExpectationValue = [1250, 750, 500, 250, 150, 100,50,25,10];
+
 
 function winExpectationDisplay(x){
   if(x){
@@ -23,7 +26,7 @@ function winExpectationDisplay(x){
 
 function betFunc(x){  //Raise bet, plus x=true, minus x=false.
    if (x){ //Bet plus
-     if(bet + 5 <= 100){
+     if(bet + 5 <= 100 && bet+5 <= credit){
      bet += 5;
      winExpectationDisplay(x);
    }
@@ -39,13 +42,15 @@ function betFunc(x){  //Raise bet, plus x=true, minus x=false.
 
 //-------------------------------------CARDS COLOR AND HELD -------------------------------
 function cartiOnClick(x,z){
-  y = document.getElementById(x).style.background;
-  if(y === "blue"){
-    document.getElementById(x).style.background = "grey";
-    document.getElementById(z).innerHTML= " ";
-  }else{
-  document.getElementById(x).style.background = "blue";
-  document.getElementById(z).innerHTML= "H E L D";
+  if (heldOn){
+      y = document.getElementById(x).style.background;
+      if(y === "blue"){
+        document.getElementById(x).style.background = "grey";
+        document.getElementById(z).innerHTML= " ";
+      }else{
+      document.getElementById(x).style.background = "blue";
+      document.getElementById(z).innerHTML= "H E L D";
+      }
   }
   return;
 }
@@ -138,10 +143,43 @@ function checkSuits(x,cards){ // x este a cata carte din cele 5
   }
 };
 
-function dealCardsScreen(){
-    clearHeld();
-    newCards = getCards(5);
+function startAgain(){
+  heldOn = false;
+  deck1 = newDeck();
+  deckShuffle = shuffle(deck1);
+  buttonsDisable("betDeal");//activam butoanele deal si bet si dezactivam collect, doubble, red si black
+  backColor(backWinColor);//scoatem culoarea de la castig
 
+
+  document.getElementById("carte1").style.setProperty("--gridArea","4/1/1/4");
+  document.getElementById("carte1").src= "photo/backCard.jpg";
+  document.getElementById("carte2").style.setProperty("--gridArea","4/1/1/4");
+  document.getElementById("carte2").src= "photo/backCard.jpg";
+  document.getElementById("carte3").style.setProperty("--gridArea","4/1/1/4");
+  document.getElementById("carte3").src= "photo/backCard.jpg";
+  document.getElementById("carte4").style.setProperty("--gridArea","4/1/1/4");
+  document.getElementById("carte4").src= "photo/backCard.jpg";
+  document.getElementById("carte5").style.setProperty("--gridArea","4/1/1/4");
+  document.getElementById("carte5").src= "photo/backCard.jpg";
+  $(".divDblCard").css("grid-template-rows","0% 100%");
+  document.getElementById("dblCardPhoto").src= "photo/backCard.jpg";
+
+  for (var i = 0; i < 5; i++) {//scoatem culoarea de la dublaj jackpot.
+    levelsDbl[i].style.background = "white";
+  }
+  document.querySelector(".dblWinLevels").style.background = "grey";
+  document.getElementById("idTextGirl").innerHTML = "Alege o miza si sa continuam!";
+  document.getElementById("deal").setAttribute("onclick" , "dealCardsScreen()");//we change deal button onclick to dealCardsScreen() function.
+  return;
+}
+
+function dealCardsScreen(){
+    heldOn = true;
+    buttonsDisable("deal");
+    credit -= bet;
+    document.getElementById("spanCredit").innerHTML = credit;
+
+    newCards = getCards(5);
     suit_card1 = checkSuits(0,newCards)//0 este a cata carte din cele 5 si new cards sunt cartile care trebuiesc verificate
     suit_card2 = checkSuits(1,newCards)
     suit_card3 = checkSuits(2,newCards)
@@ -171,8 +209,10 @@ function dealCardsScreen(){
     //setTimeout(()=>{document.getElementById("carte5").src = "#";},1600);
     return;
 }
+
 //----Deal button----------change cards----------------------------------------------
 function changeCards(){
+  heldOn = true;
   if (document.getElementById("idCard1").style.background === "grey"){
       var anotherCard = getCards(1);
       var suitCard = checkSuits(0,anotherCard);
@@ -214,58 +254,254 @@ function changeCards(){
 
 };
 
-function ifWin(){
+function ifWin(){//----------------check if win------------------
+  flo = document.getElementById("idCard5").style.background;
+  document.getElementById("idTextGirl").innerHTML = flo; //temporar !!!!!!
   var valueList = [];
   var suitsList = [];
-  var suitsListTrue = true;
-  for (i = 0; i < 5; i++){
+
+  for (i = 0; i < 5; i++){//-------suitsList & valueList--------
     valueList.push(newCards[i][2]);
     suitsList.push(newCards[i][1]);
   }
 
-  var sortList = valueList.sort(function(a,b){return a-b});
-  sortListTrue = true;
+  var sortList = valueList.sort(function(a,b){return a-b});//--sort list
+
+  var sortListStraight = [];
+  for (var i = 0; i < 5; i++) {//--------sortListStraight----any number bigger than 10 is -1 value-------
+      if (parseInt(sortList[i]) > 10){
+         sortListStraight.push(parseInt(sortList[i])-1);
+       }else {
+         sortListStraight.push(parseInt(sortList[i]));
+       }
+  }
+  var sortListTrue = true;//-------------------sortListTrue-------------------------
   for (f = 0; f < 4; f++){
-      if (parseInt(sortList[f])+1 != parseInt(sortList[f+1])) {
+      if (parseInt(sortListStraight[f])+1 != parseInt(sortListStraight[f+1])) {
         sortListTrue = false;
       }
 }
-
+  var suitsListTrue = true;//--------------suitsListTrue-----------------------------
   for (z = 0; z < 4; z++){
       if (suitsList[z] != suitsList[z+1]) {
         suitsListTrue = false;
       }
 }
+  var sortBigPairArray = [];//------------------over 10 sort cards array-----------
+  for (q of sortList){
+      if (parseInt(q) > 10) {
+        sortBigPairArray.push(q);
+      }else if (parseInt(q) === 1) {
+        sortBigPairArray.push(q);
+      }
+}
 
-document.getElementById("test2").innerHTML = parseInt(sortList[0])+1;
-document.getElementById("idTextGirl").innerHTML = sortList[0+1];
+document.getElementById("test").innerHTML = sortBigPairArray;
 
-  if (suitsListTrue === true) {
-    document.getElementById("idTextGirl").innerHTML = "Flush!!!";
-  }else if (sortListTrue === true) {
-    document.getElementById("idTextGirl").innerHTML = "Straight!!!";
-  }else if (sortList === "1,10,12,13,14" && suitsListTrue === true) {
-      document.getElementById("idTextGirl").innerHTML = "WAW !!! Royal Flush";
+  if (sortList.toString() === "1,10,12,13,14" && suitsListTrue === true) {
+    win = bet*250;
+    document.getElementById("idTextGirl").innerHTML = `WAW !!! Royal Flush You win ${win}, Collect or Doubble?`;
+    backWinColor = document.getElementsByClassName("backRoyal");
+    backColor(backWinColor);
+  }else if (sortListTrue === true && suitsListTrue === true) {
+    win = bet*150;
+    document.getElementById("idTextGirl").innerHTML = `WAW !!! Straight Flush You win ${win}, Collect or Doubble?`;
+    backWinColor = document.getElementsByClassName("backStrFl");
+    backColor(backWinColor);
+  }else if (fourOfKind(sortList)) {
+      win = bet*100;
+      document.getElementById("idTextGirl").innerHTML = `WAW !!! 4 of a Kind You win ${win}, Collect or Doubble?`;
+      backWinColor = document.getElementsByClassName("back4");
+      backColor(backWinColor);
+  }else if (fullHouse(sortList)) {
+      win = bet*50;
+      document.getElementById("idTextGirl").innerHTML = `Full House !! You win ${win}, Collect or Doubble?`;
+      backWinColor = document.getElementsByClassName("backFull");
+      backColor(backWinColor);
+  }else if (suitsListTrue === true) {
+      win = bet*30;
+      document.getElementById("idTextGirl").innerHTML = `Flush!!! You win ${win}, Collect or Doubble?`;
+      backWinColor = document.getElementsByClassName("backFlush");
+      backColor(backWinColor);
+    }else if (sortListTrue === true || sortListStraight.toString() === "1,10,11,12,13") {
+      win = bet*20;
+      document.getElementById("idTextGirl").innerHTML = `Straight!!! You win ${win}, Collect or Doubble?`;
+      backWinColor = document.getElementsByClassName("backStr");
+      backColor(backWinColor);
+  }else if (threeKinds(sortList)) {
+      win = bet*10;
+      document.getElementById("idTextGirl").innerHTML = `3 of a Kind !! You win ${win}, Collect or Doubble?`;
+      backWinColor = document.getElementsByClassName("back3");
+      backColor(backWinColor);
+  }else if (twoPair(sortList)) {
+      win = bet*5;
+      document.getElementById("idTextGirl").innerHTML = `2 pairs !! You win ${win}, Collect or Doubble?`;
+      backWinColor = document.getElementsByClassName("back2");
+      backColor(backWinColor);
+  }else if (bigPair(sortBigPairArray)) {
+      win = bet*2;
+      document.getElementById("idTextGirl").innerHTML = `Big pair !! You win ${win}, Collect or Doubble?`;
+      backWinColor = document.getElementsByClassName("backPair");
+      backColor(backWinColor);
   }
   return;
 }
 
+//-----------------------doubble or not--------------------------------------------
+function doubbleOrNot(dbl){
+    if(!dbl){
+      credit += win;
+      document.getElementById("spanCredit").innerHTML = credit;
+      startAgain();//----------------start again------------------------------------
+    }else {
+      level = 0;
+      document.querySelector(".dblWinLevels").style.background = "#ECECEC";
+      buttonsDisable("collDbl");
+    }
+    return;
+}
 
-function flo(){
+//------------------Red or black-----------------------------------
+function redBlack(colorDbl){
+    document.getElementById("idTextGirl").innerHTML = colorDbl;
+    doubbleCard = getCards(1);
+    suitDblCard = checkSuits(0,doubbleCard);
+    winTrue = false;
 
+    $(".divDblCard").css("grid-template-rows","25% 75%");
+    document.getElementById("divNrDblCard").innerHTML = doubbleCard[0][0];
+    document.getElementById("dblCardPhoto").src= suitDblCard;
+
+    if (colorDbl === "red"){
+      if (suitDblCard === "photo/suit_hard.png" || suitDblCard === "photo/suit_romb.png"){
+        winTrue = true;
+      }
+    }else if (colorDbl === "black"){
+      if (suitDblCard === "photo/suit_clubs.png" || suitDblCard === "photo/suit_spade.png"){
+        winTrue = true;
+      }
+    }
+
+    if (winTrue){
+      levelsDbl = document.getElementsByClassName("levels");
+      win *= 2;
+      document.getElementById("idTextGirl").innerHTML = `Ai dublat!! Castig: ${win}, baga in casa sau incearca sa ghicesti urmatoarea culoare. `;
+      if (level < 5){
+        levelsDbl[level].style.background = "yellow";
+        level++;
+        setTimeout(()=>{$(".divDblCard").css("grid-template-rows","0% 100%"); document.getElementById("dblCardPhoto").src= "photo/backCard.jpg";},1200);
+      }else{
+          levelsDbl[5].style.background = "pink";
+          document.getElementById("idTextGirl").innerHTML = "JACKPOT !!! Ai mai castigat 500 !!!";
+          win += 500;
+          credit += win;
+          setTimeout(()=>{document.getElementById("spanCredit").innerHTML = credit; startAgain();},10000);
+      }
+    }else {
+      document.getElementById("idTextGirl").innerHTML = "Ai pierdut!!";
+      level = 0;
+      win = 0;
+      setTimeout(()=>{startAgain();},1500);
+    }
+    return;
+}
+//-------------------check win functions---------------------------
+
+function fourOfKind(x){//-------------------4 of a kind-----------------------
+  if (x[0] === x[1] && x[1] === x[2] && x[2] === x[3]) {
+    return true;
+  }
+  if (x[1] === x[2] && x[2] === x[3] && x[3] === x[4]) {
+    return true;
+  }
+  return false;
 };
-function flo2(){
 
+function fullHouse(x){//-----------------------fullhouse----------------------
+  if (x[0] === x[1] && x[1] === x[2] && x[3] === x[4]) {
+    return true;
+  }
+  if (x[0] === x[1] && x[2] === x[3] && x[3] === x[4]) {
+    return true;
+  }
+  return false;
 };
 
+function threeKinds(x){//---------------------three of kind-------------------
+  if (x[0] === x[1] && x[1] === x[2]) {
+    return true;
+  }
+  if (x[1] === x[2] && x[2] === x[3]) {
+    return true;
+  }
+  if (x[2] === x[3] && x[3] === x[4]) {
+    return true;
+  }
+  return false;
+};
 
+function twoPair(x){//------------------------two pair------------------------
+  if (x[0] === x[1] && x[2] === x[3]) {
+    return true;
+  }
+  if (x[0] === x[1] && x[3] === x[4]) {
+    return true;
+  }
+  if (x[1] === x[2] && x[3] === x[4]) {
+    return true;
+  }
+  return false;
+};
 
+function bigPair(x){//--------------------check if one pair in big pairs array---------------
 
+  if (x.length > 1) {
+     for (var i = 0; i < x.length; i++) {
+       if (x[i] === x[i+1]) {
+         return true;
+       }
+     }
+   }
+   return false;
+};
 
-function start(){//----------??????????????????----------------
-  //temporar
+//----------------------------------if we win -------------------------------------
+function backColor(x){
+  if (x[0].style.background === "blue") {
+    x[0].style.background = "lightblue";
+    x[1].style.background = "pink";
+  }else{
+  x[0].style.background = "blue";
+  x[1].style.background = "blue";
+  document.getElementById("collect").disabled = false;
+  document.getElementById("doubble").disabled = false;
+  document.getElementById("deal").disabled = true;
+  }
+  return;
+}
 
+function buttonsDisable(whichButton){//----------buttons on off----------------
+   if (whichButton === "betDeal"){//unblock deal bet+ bet-
+     document.getElementById("betMinus").disabled = false;
+     document.getElementById("betPlus").disabled = false;
+     document.getElementById("deal").disabled = false;
+     document.getElementById("doubble").disabled = true;
+     document.getElementById("collect").disabled = true;
+     document.getElementById("red").disabled = true;
+     document.getElementById("black").disabled = true;
 
+   }else if (whichButton === "deal") {
+     document.getElementById("betMinus").disabled = true;
+     document.getElementById("betPlus").disabled = true;
+   }else if (whichButton === "collDbl") {
+      document.getElementById("red").disabled = false;
+      document.getElementById("black").disabled = false;
+      document.getElementById("doubble").disabled = true;
+   }else if (whichButton === "redBlack") {
+
+   }
+
+   return;
 }
 
 
