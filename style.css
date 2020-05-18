@@ -8,7 +8,6 @@
       grid-area: 2/2/3/3;
 }
 
-
 h1 {
   background: blue;
   text-align: center;
@@ -113,9 +112,9 @@ ul{
   grid-template-areas: "areaNumar area2 area3" "area4 areaSuits area6" "area7 areaHeld area9";
 }
 .clsCardIndividual{
-  height: 100%;
+  height: auto;
   width: 100%;
-  grid-area: 4/1/1/4;
+  grid-area: var(--gridArea);
 }
 .clasAreaNumar{
   grid-area: areaNumar;
