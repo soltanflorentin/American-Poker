@@ -150,33 +150,33 @@ function checkSuits(x,cards){ // x este a cata carte din cele 5
 };
 
 function startAgain(){
-  if (credit === 0){
-    gameOver();
-  }
-  win = 0;
-  heldOn = false;
+  win = 0;//castigul dupa ce ti vin cartile a 2 a oara
+  heldOn = false;//daca apare HELD sau nu
   deck1 = newDeck();
   deckShuffle = shuffle(deck1);
-  buttonsDisable("betDeal");//activam butoanele deal si bet si dezactivam collect, doubble, red si black
+  buttonsDisable("betDeal");//activam butoanele deal si bet si dezactivam restul
 
-  document.getElementById("carte1").style.setProperty("--gridArea","4/1/1/4");
+  document.getElementById("carte1").style.setProperty("grid-area","4/1/1/4");
   document.getElementById("carte1").src= "photo/backCard.jpg";
-  document.getElementById("carte2").style.setProperty("--gridArea","4/1/1/4");
+  document.getElementById("carte2").style.setProperty("grid-area","4/1/1/4");
   document.getElementById("carte2").src= "photo/backCard.jpg";
-  document.getElementById("carte3").style.setProperty("--gridArea","4/1/1/4");
+  document.getElementById("carte3").style.setProperty("grid-area","4/1/1/4");
   document.getElementById("carte3").src= "photo/backCard.jpg";
-  document.getElementById("carte4").style.setProperty("--gridArea","4/1/1/4");
+  document.getElementById("carte4").style.setProperty("grid-area","4/1/1/4");
   document.getElementById("carte4").src= "photo/backCard.jpg";
-  document.getElementById("carte5").style.setProperty("--gridArea","4/1/1/4");
+  document.getElementById("carte5").style.setProperty("grid-area","4/1/1/4");
   document.getElementById("carte5").src= "photo/backCard.jpg";
   $(".divDblCard").css("grid-template-rows","0% 100%");
   document.getElementById("dblCardPhoto").src= "photo/backCard.jpg";
 
-  for (var i = 0; i < 5; i++) {//scoatem culoarea de la dublaj jackpot.
+  for (var i = 0; i < 6; i++) {//scoatem culoarea de la dublaj jackpot.
     levelsDbl[i].style.background = "white";
   }
-  document.querySelector(".dblWinLevels").style.background = "grey";
+  document.querySelector(".dblWinLevels").style.background = "#005366";
   document.getElementById("idTextGirl").innerHTML = "Alege o miza si sa continuam!";
+  if (credit === 0){//verifica daca credit = 0 si game over
+    gameOver();
+  }
   document.getElementById("deal").setAttribute("onclick" , "dealCardsScreen()");//we change deal button onclick to dealCardsScreen() function.
   return;
 }
@@ -204,19 +204,19 @@ function dealCardsScreen(){
     suit_card5 = checkSuits(4,newCards)
     document.getElementById("idCardNumber1").innerHTML = newCards[0][0];
     document.getElementById("carte1").src= suit_card1;
-    document.getElementById("carte1").style.setProperty("--gridArea","areaSuits");
+    document.getElementById("carte1").style.setProperty("grid-area","2/2/2/2");
     document.getElementById("idCardNumber2").innerHTML = newCards[1][0];
     document.getElementById("carte2").src= suit_card2;
-    document.getElementById("carte2").style.setProperty("--gridArea","areaSuits");
+    document.getElementById("carte2").style.setProperty("grid-area","2/2/2/2");
     document.getElementById("idCardNumber3").innerHTML = newCards[2][0];
     document.getElementById("carte3").src= suit_card3;
-    document.getElementById("carte3").style.setProperty("--gridArea","areaSuits");
+    document.getElementById("carte3").style.setProperty("grid-area","2/2/2/2");
     document.getElementById("idCardNumber4").innerHTML = newCards[3][0];
     document.getElementById("carte4").src= suit_card4;
-    document.getElementById("carte4").style.setProperty("--gridArea","areaSuits");
+    document.getElementById("carte4").style.setProperty("grid-area","2/2/2/2");
     document.getElementById("idCardNumber5").innerHTML = newCards[4][0];
     document.getElementById("carte5").src= suit_card5;
-    document.getElementById("carte5").style.setProperty("--gridArea","areaSuits");
+    document.getElementById("carte5").style.setProperty("grid-area","2/2/2/2");
     document.getElementById("deal").setAttribute("onclick" , "changeCards()");//we change deal button onclick to changeCards() function.
 
     //setTimeout(()=>{document.getElementById("carte1").src = "#";},10);
@@ -489,12 +489,12 @@ function bigPair(x){//--------------------check if one pair in big pairs array--
 
 //----------------------------------if we win -------------------------------------
 function backColor(x){
-  if (x[0].style.background === "blue") {
-    x[0].style.background = "lightblue";
-    x[1].style.background = "pink";
+  if (x[0].style.background === "yellow") {
+    x[0].style.background = "#00FFEF";
+    x[1].style.background = "#00FFEF";
   }else{
-  x[0].style.background = "blue";
-  x[1].style.background = "blue";
+  x[0].style.background = "yellow";
+  x[1].style.background = "yellow";
   document.getElementById("collect").disabled = false;
   document.getElementById("doubble").disabled = false;
   document.getElementById("deal").disabled = true;

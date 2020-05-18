@@ -18,20 +18,20 @@ h1 {
   height: 200px;
   border: 1px solid red;
   display: grid;
-  grid-template-columns: 300px 50px 165px auto 160px 230px;
-  background: grey;
+  grid-template-columns: 230px 50px 165px auto 160px 230px;
+  background: #005366;
 }
 ul{
   padding-left: 0px;
 }
 .topPart ul li{
   list-style: none;
-  background: lightblue;
+  background: #00FFEF;
   font-weight: bold;
   font-size: 16px;
 }
 .winBetAll{
-  background: pink;
+  background: #00FFEF;
   width: 50px;
   font-weight: bold;
   font-size: 16px;
@@ -47,17 +47,19 @@ ul{
 .textJoc{
   color: white;
   font-weight: bold;
+  font-size: 20px;
   display: flex;
   flex-wrap: wrap;
 }
 .divDblCard{
   height: 200px;
-  background: lightpink;
+  background: lightgrey;
   display: grid;
   grid-template-rows: 0% 100%;
   font-size: 40px;
   font-weight: bold;
-  color: white;
+  ccolor: white;
+  border: 1px solid black;
 }
 
 #dblCardPhoto{
@@ -73,7 +75,7 @@ ul{
 .levels{
   height: 35px;
   width: 130px;
-  border: 1px solid red;
+  border: 2px solid red;
   background: white;
 }
 #jackpotLevel6{
@@ -113,7 +115,7 @@ ul{
 .clsCardIndividual{
   height: 100%;
   width: 100%;
-  grid-area: var(--gridArea);
+  grid-area: 4/1/1/4;
 }
 .clasAreaNumar{
   grid-area: areaNumar;
