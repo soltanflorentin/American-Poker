@@ -115,6 +115,8 @@ ul{
   height: auto;
   width: 100%;
   grid-area: var(--gridArea);
+  align-self: flex-end;
+
 }
 .clasAreaNumar{
   grid-area: areaNumar;
