@@ -156,15 +156,15 @@ function startAgain(){
   deckShuffle = shuffle(deck1);
   buttonsDisable("betDeal");//activam butoanele deal si bet si dezactivam restul
 
-  document.getElementById("carte1").style.setProperty("grid-area","4/1/1/4");
+  document.getElementById("carte1").style.setProperty("--gridArea","4/1/1/4");
   document.getElementById("carte1").src= "photo/backCard.jpg";
-  document.getElementById("carte2").style.setProperty("grid-area","4/1/1/4");
+  document.getElementById("carte2").style.setProperty("--gridArea","4/1/1/4");
   document.getElementById("carte2").src= "photo/backCard.jpg";
-  document.getElementById("carte3").style.setProperty("grid-area","4/1/1/4");
+  document.getElementById("carte3").style.setProperty("--gridArea","4/1/1/4");
   document.getElementById("carte3").src= "photo/backCard.jpg";
-  document.getElementById("carte4").style.setProperty("grid-area","4/1/1/4");
+  document.getElementById("carte4").style.setProperty("--gridArea","4/1/1/4");
   document.getElementById("carte4").src= "photo/backCard.jpg";
-  document.getElementById("carte5").style.setProperty("grid-area","4/1/1/4");
+  document.getElementById("carte5").style.setProperty("--gridArea","4/1/1/4");
   document.getElementById("carte5").src= "photo/backCard.jpg";
   $(".divDblCard").css("grid-template-rows","0% 100%");
   document.getElementById("dblCardPhoto").src= "photo/backCard.jpg";
@@ -173,7 +173,7 @@ function startAgain(){
     levelsDbl[i].style.background = "white";
   }
   document.querySelector(".dblWinLevels").style.background = "#005366";
-  document.getElementById("idTextGirl").innerHTML = "Alege o miza si sa continuam!";
+  document.getElementById("idTextGirl").innerHTML = "Choose a bet and let's continue!";
   if (credit === 0){//verifica daca credit = 0 si game over
     gameOver();
   }
@@ -184,7 +184,7 @@ function startAgain(){
 function dealCardsScreen(){
     heldOn = true;
     buttonsDisable("deal");
-    document.getElementById("idTextGirl").innerHTML = "Alege ce carti vrei sa opresti.";
+    document.getElementById("idTextGirl").innerHTML = "Choose which cards you want to keep.";
 
     var checkCredit = creditCheck();
     if (checkCredit){
@@ -204,25 +204,20 @@ function dealCardsScreen(){
     suit_card5 = checkSuits(4,newCards)
     document.getElementById("idCardNumber1").innerHTML = newCards[0][0];
     document.getElementById("carte1").src= suit_card1;
-    document.getElementById("carte1").style.setProperty("grid-area","2/2/2/2");
+    document.getElementById("carte1").style.setProperty("--gridArea","areaSuits");
     document.getElementById("idCardNumber2").innerHTML = newCards[1][0];
     document.getElementById("carte2").src= suit_card2;
-    document.getElementById("carte2").style.setProperty("grid-area","2/2/2/2");
+    document.getElementById("carte2").style.setProperty("--gridArea","areaSuits");
     document.getElementById("idCardNumber3").innerHTML = newCards[2][0];
     document.getElementById("carte3").src= suit_card3;
-    document.getElementById("carte3").style.setProperty("grid-area","2/2/2/2");
+    document.getElementById("carte3").style.setProperty("--gridArea","areaSuits");
     document.getElementById("idCardNumber4").innerHTML = newCards[3][0];
     document.getElementById("carte4").src= suit_card4;
-    document.getElementById("carte4").style.setProperty("grid-area","2/2/2/2");
+    document.getElementById("carte4").style.setProperty("--gridArea","areaSuits");
     document.getElementById("idCardNumber5").innerHTML = newCards[4][0];
     document.getElementById("carte5").src= suit_card5;
-    document.getElementById("carte5").style.setProperty("grid-area","2/2/2/2");
+    document.getElementById("carte5").style.setProperty("--gridArea","areaSuits");
     document.getElementById("deal").setAttribute("onclick" , "changeCards()");//we change deal button onclick to changeCards() function.
-
-    //setTimeout(()=>{document.getElementById("carte1").src = "#";},10);
-    //setTimeout(()=>{document.getElementById("carte2").src = "#";},400);
-    //setTimeout(()=>{document.getElementById("carte3").src = "#";},800);
-    //setTimeout(()=>{document.getElementById("carte4").src = "#";},1200);
     //setTimeout(()=>{document.getElementById("carte5").src = "#";},1600);
     return;
 }
@@ -358,7 +353,7 @@ function ifWin(){//----------------check if win------------------
   }
   if (win === 0){
     buttonsDisable("betOn");
-    document.getElementById("idTextGirl").innerHTML = "Ai pierdut ! Alege o miza si sa continuam!";
+    document.getElementById("idTextGirl").innerHTML = "You lose! Choose your bet and let's continue!";
     if (credit === 0){
       gameOver();
     }
@@ -379,7 +374,7 @@ function doubbleOrNot(dbl){
     }else {
       level = 0;
       document.querySelector(".dblWinLevels").style.background = "#ECECEC";
-      document.getElementById("idTextGirl").innerHTML = "Ghiceste culoarea cartii, rosie sau neagra?";
+      document.getElementById("idTextGirl").innerHTML = "Guess the color of the card, Red or Black?";
       buttonsDisable("collDbl");
     }
     return;
@@ -408,20 +403,21 @@ function redBlack(colorDbl){
     if (winTrue){
       levelsDbl = document.getElementsByClassName("levels");
       win *= 2;
-      document.getElementById("idTextGirl").innerHTML = `Ai dublat!! Castig: ${win}, baga in casa sau incearca sa ghicesti urmatoarea culoare. `;
+      document.getElementById("idTextGirl").innerHTML = `You doubled!! Win: ${win}, collect or try to guess the next color. `;
       if (level < 5){
         levelsDbl[level].style.background = "yellow";
         level++;
         setTimeout(()=>{$(".divDblCard").css("grid-template-rows","0% 100%"); document.getElementById("dblCardPhoto").src= "photo/backCard.jpg";},1200);
       }else{
           levelsDbl[5].style.background = "pink";
-          document.getElementById("idTextGirl").innerHTML = "JACKPOT !!! Ai mai castigat 500 !!!";
-          win += 500;
+          var jackpot = win*25/100;
+          win += jackpot;
+          document.getElementById("idTextGirl").innerHTML = `JACKPOT !!! You win ${win}, plus ${jackpot} jackpot !!!`;
           credit += win;
           setTimeout(()=>{backColor(backWinColor); document.getElementById("spanCredit").innerHTML = credit; startAgain();},10000);
       }
     }else {
-      document.getElementById("idTextGirl").innerHTML = "Ai pierdut!!";
+      document.getElementById("idTextGirl").innerHTML = "You lose!!";
       level = 0;
       setTimeout(()=>{backColor(backWinColor); startAgain();},1500);
     }
