@@ -7,6 +7,16 @@ var win = 0;
 var levelsDbl = document.getElementsByClassName("levels");
 var betExpectationValuefix = [1250, 750, 500, 250, 150, 100,50,25,10];
 var betExpectationValue = [1250, 750, 500, 250, 150, 100,50,25,10];
+var backgroundTop = "#001fa7";
+var backgroundCarti = "white";
+var colorNrCarti = "black";
+var betColor = "yellow";
+var backgroundWinColor = "rgb(57, 255, 20)";
+var winColor = "black";
+var backgroundHeld = "rgb(74, 241, 242)";
+var backgroundJackpot = "black";
+var piloniJackpot = "yellow";
+var piloniJackpotRepaus = "rgb(104, 101, 101)";
 
 
 function winExpectationDisplay(x){
@@ -57,12 +67,12 @@ function creditCheck(){
 function cartiOnClick(x,z){
   if (heldOn){
       y = document.getElementById(x).style.background;
-      if(y === "blue"){
-        document.getElementById(x).style.background = "grey";
+      if(y === backgroundHeld){
+        document.getElementById(x).style.background = backgroundCarti;
         document.getElementById(z).innerHTML= " ";
       }else{
-      document.getElementById(x).style.background = "blue";
-      document.getElementById(z).innerHTML= "H E L D";
+        document.getElementById(x).style.background = backgroundHeld;
+        document.getElementById(z).innerHTML= "H E L D";
       }
   }
   return;
@@ -124,15 +134,15 @@ function getCards(x){ // x este nr de carti dorite -----
 }
 
 function clearHeld(){
-  document.getElementById("idCard1").style.background = "grey";
+  document.getElementById("idCard1").style.background = backgroundCarti;
   document.getElementById("held1").innerHTML= " ";
-  document.getElementById("idCard2").style.background = "grey";
+  document.getElementById("idCard2").style.background = backgroundCarti;
   document.getElementById("held2").innerHTML= " ";
-  document.getElementById("idCard3").style.background = "grey";
+  document.getElementById("idCard3").style.background = backgroundCarti;
   document.getElementById("held3").innerHTML= " ";
-  document.getElementById("idCard4").style.background = "grey";
+  document.getElementById("idCard4").style.background = backgroundCarti;
   document.getElementById("held4").innerHTML= " ";
-  document.getElementById("idCard5").style.background = "grey";
+  document.getElementById("idCard5").style.background = backgroundCarti;
   document.getElementById("held5").innerHTML= " ";
   return;
 }
@@ -170,9 +180,9 @@ function startAgain(){
   document.getElementById("dblCardPhoto").src= "photo/backCard.jpg";
 
   for (var i = 0; i < 6; i++) {//scoatem culoarea de la dublaj jackpot.
-    levelsDbl[i].style.background = "white";
+    levelsDbl[i].style.background = piloniJackpotRepaus;
   }
-  document.querySelector(".dblWinLevels").style.background = "#005366";
+  document.querySelector(".dblWinLevels").style.background = backgroundTop;
   document.getElementById("idTextGirl").innerHTML = "Choose a bet and let's continue!";
   if (credit === 0){//verifica daca credit = 0 si game over
     gameOver();
@@ -225,35 +235,35 @@ function dealCardsScreen(){
 //----Deal button----------change cards----------------------------------------------
 function changeCards(){
   heldOn = false;
-  if (document.getElementById("idCard1").style.background === "grey" || document.getElementById("idCard1").style.background === "#808080"){
+  if (document.getElementById("idCard1").style.background === backgroundCarti || document.getElementById("idCard1").style.background === "#808080"){
       var anotherCard = getCards(1);
       var suitCard = checkSuits(0,anotherCard);
       document.getElementById("idCardNumber1").innerHTML = anotherCard[0][0];
       document.getElementById("carte1").src= suitCard;
       newCards[0] = anotherCard[0];
   }
-  if (document.getElementById("idCard2").style.background === "grey"){
+  if (document.getElementById("idCard2").style.background === backgroundCarti){
       var anotherCard = getCards(1);
       var suitCard = checkSuits(0,anotherCard);
       document.getElementById("idCardNumber2").innerHTML = anotherCard[0][0];
       document.getElementById("carte2").src= suitCard;
       newCards[1] = anotherCard[0];
   }
-  if (document.getElementById("idCard3").style.background === "grey"){
+  if (document.getElementById("idCard3").style.background === backgroundCarti){
       var anotherCard = getCards(1);
       var suitCard = checkSuits(0,anotherCard);
       document.getElementById("idCardNumber3").innerHTML = anotherCard[0][0];
       document.getElementById("carte3").src= suitCard;
       newCards[2] = anotherCard[0];
   }
-  if (document.getElementById("idCard4").style.background === "grey"){
+  if (document.getElementById("idCard4").style.background === backgroundCarti){
       var anotherCard = getCards(1);
       var suitCard = checkSuits(0,anotherCard);
       document.getElementById("idCardNumber4").innerHTML = anotherCard[0][0];
       document.getElementById("carte4").src= suitCard;
       newCards[3] = anotherCard[0];
   }
-  if (document.getElementById("idCard5").style.background === "grey"){
+  if (document.getElementById("idCard5").style.background === backgroundCarti){
       var anotherCard = getCards(1);
       var suitCard = checkSuits(0,anotherCard);
       document.getElementById("idCardNumber5").innerHTML = anotherCard[0][0];
@@ -373,7 +383,10 @@ function doubbleOrNot(dbl){
       startAgain();//----------------start again------------------------------------
     }else {
       level = 0;
-      document.querySelector(".dblWinLevels").style.background = "#ECECEC";
+      document.querySelector(".dblWinLevels").style.background = backgroundJackpot;
+      for (var i = 0; i < 6; i++) {//punem culoarea de dublaj jackpot.
+        levelsDbl[i].style.background = "white";
+      }
       document.getElementById("idTextGirl").innerHTML = "Guess the color of the card, Red or Black?";
       buttonsDisable("collDbl");
     }
@@ -405,7 +418,7 @@ function redBlack(colorDbl){
       win *= 2;
       document.getElementById("idTextGirl").innerHTML = `You doubled!! Win: ${win}, collect or try to guess the next color. `;
       if (level < 5){
-        levelsDbl[level].style.background = "yellow";
+        levelsDbl[level].style.background = betColor;
         level++;
         setTimeout(()=>{$(".divDblCard").css("grid-template-rows","0% 100%"); document.getElementById("dblCardPhoto").src= "photo/backCard.jpg";},1200);
       }else{
@@ -485,17 +498,21 @@ function bigPair(x){//--------------------check if one pair in big pairs array--
 
 //----------------------------------if we win -------------------------------------
 function backColor(x){
-  if (x[0].style.background === "yellow") {
-    x[0].style.background = "#00FFEF";
-    x[1].style.background = "#00FFEF";
+  if (x[0].style.background == backgroundWinColor) {
+    x[0].style.background = backgroundTop;
+    x[0].style.color = betColor;
+    x[1].style.background = backgroundTop;
+    x[1].style.color = betColor;
   }else{
-  x[0].style.background = "yellow";
-  x[1].style.background = "yellow";
-  document.getElementById("collect").disabled = false;
-  document.getElementById("doubble").disabled = false;
-  document.getElementById("deal").disabled = true;
+    x[0].style.background = backgroundWinColor;
+    x[0].style.color = winColor;
+    x[1].style.background = backgroundWinColor;
+    x[1].style.color = winColor;
+    document.getElementById("collect").disabled = false;
+    document.getElementById("doubble").disabled = false;
+    document.getElementById("deal").disabled = true;
   }
-  return;
+  return null;
 }
 
 function buttonsDisable(whichButton){//----------buttons on off----------------
