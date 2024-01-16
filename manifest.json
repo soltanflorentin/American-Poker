@@ -3,7 +3,7 @@
     "background_color": "#90EE90",
     "display": "fullscreen",
     "scope": "/",
-    "start_url": "/American-Poker/",
+    "start_url": "/American-Poker/index.html",
     "name": "flo poker",
     "short_name": "poker",
     "icons": [
