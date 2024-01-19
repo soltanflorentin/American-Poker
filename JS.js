@@ -1,5 +1,5 @@
 
-//---------------------------------WIN DYSPLAY ---------------------------------
+//---------------------------------WIN DISPLAY ---------------------------------
 var bet = 5;
 var credit = 100;
 var heldOn = false;
@@ -7,7 +7,7 @@ var win = 0;
 var levelsDbl = document.getElementsByClassName("levels");
 var betExpectationValuefix = [1250, 750, 500, 250, 150, 100,50,25,10];
 var betExpectationValue = [1250, 750, 500, 250, 150, 100,50,25,10];
-var backgroundTop = "#001fa7";
+var backgroundTop = "#ad86bd";
 var backgroundCarti = "white";
 var colorNrCarti = "black";
 var betColor = "yellow";
@@ -16,7 +16,7 @@ var winColor = "black";
 var backgroundHeld = "rgb(74, 241, 242)";
 var backgroundJackpot = "black";
 var piloniJackpot = "yellow";
-var piloniJackpotRepaus = "rgb(104, 101, 101)";
+var piloniJackpotRepaus = "rgb(219 210 210)";
 
 
 function winExpectationDisplay(x){
@@ -383,7 +383,7 @@ function doubbleOrNot(dbl){
       startAgain();//----------------start again------------------------------------
     }else {
       level = 0;
-      document.querySelector(".dblWinLevels").style.background = backgroundJackpot;
+      // document.querySelector(".dblWinLevels").style.background = backgroundJackpot;
       for (var i = 0; i < 6; i++) {//punem culoarea de dublaj jackpot.
         levelsDbl[i].style.background = "white";
       }

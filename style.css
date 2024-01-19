@@ -1,37 +1,44 @@
 :root{
   --gridArea: 4/1/1/4;
   --colorBackgroundCards: grey;
-  --colorBackgroundCardsHeld: blue;
+  --colorBackgroundCardsHeld: #ad86bd;
 }
 html body{
-  background-color: #1F51FF;
+  background-color: rgb(232, 224, 224);
 }
 main {
   border: 10px solid lightgreen;
   border-width: 20px 20px 10px 20px;
+}
+@media only screen and (min-device-width: 1150px) {
+  main {
+    width: 1100px;
+    margin: 100px auto;
+  }
 }
 .clsCardIndividualSuits{
       grid-area: 2/2/3/3;
 }
 
 h1 {
-  background: blue;
+  background: #ad86bd;
   text-align: center;
 }
 
 .topPart {
   display: grid;
   grid-template-columns: 230px 50px 165px auto 160px 230px;
-  background: #001fa7;
+  background: #ad86bd;
 }
 ul{
   padding-left: 0px;
 }
 .topPart ul li{
   list-style: none;
-  background: #001fa7;
+  background: #ad86bd;
   font-weight: bold;
   font-size: 16px;
+  margin-left: 6px;
 }
 .betPanel {
   color: yellow;
@@ -84,7 +91,7 @@ ul{
   height: 35px;
   width: 130px;
   border: 2px solid darkgoldenrod;
-  background: rgb(104, 101, 101);
+  background: rgb(219 210 210);
 }
 #jackpotLevel6{
   width: 190px;
@@ -92,7 +99,13 @@ ul{
   text-align: center;
   font-weight: bold;
   font-size: 20px;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.jackpotText {
+  margin: 0 !important;
+  color: #838300;
 }
 
 #hr {
@@ -185,9 +198,3 @@ ul{
   width: 100px;
 }
 
-@media only screen and (min-device-width: 1150px) {
-  main {
-    width: 1100px;
-    margin: 100px auto;
-  }
-}
